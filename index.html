@@ -14,32 +14,33 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header role="banner">
             <h1>TodoInput</h1>
         </header>
         
-        <main>
-            <div class="todo-input-section">
-                <h2>New Task</h2>
+        <main role="main">
+            <section class="todo-input-section" aria-labelledby="new-task-heading">
+                <h2 id="new-task-heading">New Task</h2>
                 <div class="input-container">
-                    <input type="text" id="taskInput" placeholder="Enter your task here..." maxlength="50">
-                    <button id="addTaskBtn" class="add-btn">Add new task</button>
+                    <label for="taskInput" class="sr-only">Enter your task</label>
+                    <input type="text" id="taskInput" placeholder="Enter your task here..." maxlength="50" aria-describedby="errorMessage" aria-required="true">
+                    <button id="addTaskBtn" class="add-btn" aria-label="Add new task to the list">Add new task</button>
                 </div>
-                <div id="errorMessage" class="error-message"></div>
-            </div>
+                <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
+            </section>
             
-            <div class="todo-list-section">
-                <h2>Todo List</h2>
+            <section class="todo-list-section" aria-labelledby="todo-list-heading">
+                <h2 id="todo-list-heading">Todo List</h2>
                 <div class="task-controls">
-                    <button id="deleteAllBtn" class="delete-all-btn" disabled>Delete All</button>
+                    <button id="deleteAllBtn" class="delete-all-btn" disabled aria-label="Delete all tasks from the list">Delete All</button>
                 </div>
-                <ul id="taskList" class="task-list">
+                <ul id="taskList" class="task-list" role="list" aria-label="List of tasks">
                     <!-- Tasks will be dynamically added here -->
                 </ul>
-                <div id="noTasksMessage" class="no-tasks-message" style="display: none;">
+                <div id="noTasksMessage" class="no-tasks-message" style="display: none;" role="status" aria-live="polite">
                     No tasks to delete
                 </div>
-            </div>
+            </section>
         </main>
     </div>
     
