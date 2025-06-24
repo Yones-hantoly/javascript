@@ -18,11 +18,61 @@
     border: 0;
 }
 
+/* CSS Custom Properties for theming */
+:root {
+    /* Color palette */
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --primary-darker: #21618c;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --accent-dark: #c0392b;
+    --success-color: #27ae60;
+    --success-dark: #229954;
+    --warning-color: #f39c12;
+    --warning-dark: #d68910;
+    --neutral-light: #ecf0f1;
+    --neutral-medium: #bdc3c7;
+    --neutral-dark: #7f8c8d;
+    --background-color: #f5f7fa;
+    --text-color: #333;
+    --white: #ffffff;
+    
+    /* Typography */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: 1rem;
+    --font-size-large: 1.5rem;
+    --font-size-xlarge: 2.5rem;
+    --font-size-small: 0.9rem;
+    --font-size-xsmall: 0.8rem;
+    --line-height-base: 1.6;
+    
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    
+    /* Border radius */
+    --border-radius-sm: 3px;
+    --border-radius-md: 5px;
+    --border-radius-lg: 10px;
+    
+    /* Shadows */
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.3);
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: var(--line-height-base);
 }
 
 .container {
