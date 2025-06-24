@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for SEO and social media -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern, responsive Todo List application for efficient task management">
+    <meta name="keywords" content="todo, task management, productivity, javascript, web app">
+    <meta name="author" content="JavaScript Development Team">
+    <meta property="og:title" content="TodoInput - Task Management">
+    <meta property="og:description" content="A modern, responsive Todo List application for efficient task management">
+    <meta property="og:type" content="website">
     <title>TodoInput - Task Management</title>
+    
+    <!-- External stylesheets -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Main application container -->
     <div class="container">
-        <header>
+        <header role="banner">
             <h1>TodoInput</h1>
         </header>
         
-        <main>
-            <div class="todo-input-section">
-                <h2>New Task</h2>
+        <main role="main">
+            <section class="todo-input-section" aria-labelledby="new-task-heading">
+                <h2 id="new-task-heading">New Task</h2>
                 <div class="input-container">
-                    <input type="text" id="taskInput" placeholder="Enter your task here..." maxlength="50">
-                    <button id="addTaskBtn" class="add-btn">Add new task</button>
+                    <label for="taskInput" class="sr-only">Enter your task</label>
+                    <input type="text" id="taskInput" placeholder="Enter your task here..." maxlength="50" aria-describedby="errorMessage" aria-required="true">
+                    <button id="addTaskBtn" class="add-btn" aria-label="Add new task to the list">Add new task</button>
                 </div>
-                <div id="errorMessage" class="error-message"></div>
-            </div>
+                <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
+            </section>
             
-            <div class="todo-list-section">
-                <h2>Todo List</h2>
+            <section class="todo-list-section" aria-labelledby="todo-list-heading">
+                <h2 id="todo-list-heading">Todo List</h2>
                 <div class="task-controls">
-                    <button id="deleteAllBtn" class="delete-all-btn" disabled>Delete All</button>
+                    <button id="deleteAllBtn" class="delete-all-btn" disabled aria-label="Delete all tasks from the list">Delete All</button>
                 </div>
-                <ul id="taskList" class="task-list">
+                <ul id="taskList" class="task-list" role="list" aria-label="List of tasks">
                     <!-- Tasks will be dynamically added here -->
                 </ul>
-                <div id="noTasksMessage" class="no-tasks-message" style="display: none;">
+                <div id="noTasksMessage" class="no-tasks-message" style="display: none;" role="status" aria-live="polite">
                     No tasks to delete
                 </div>
-            </div>
+            </section>
         </main>
     </div>
     
     <!-- Popup Modal -->
-    <div id="popup" class="popup-overlay" style="display: none;">
+    <div id="popup" class="popup-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupMessage">
         <div class="popup-content">
             <h3 id="popupTitle">Confirmation</h3>
             <p id="popupMessage">Are you sure you want to perform this action?</p>
-            <div class="popup-buttons">
-                <button id="confirmBtn" class="confirm-btn">Confirm</button>
-                <button id="cancelBtn" class="cancel-btn">Cancel</button>
+            <div class="popup-buttons" role="group" aria-label="Confirmation buttons">
+                <button id="confirmBtn" class="confirm-btn" aria-label="Confirm action">Confirm</button>
+                <button id="cancelBtn" class="cancel-btn" aria-label="Cancel action">Cancel</button>
             </div>
         </div>
     </div>
