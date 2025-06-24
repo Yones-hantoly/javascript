@@ -1,18 +1,14 @@
-// Todo List Application - JavaScript Implementation
-// Following guidelines: arrow functions only, localStorage, input validation, popups
-// Student 2: Enhanced JavaScript functionality and error handling
 
-// Global variables
 let tasks = [];
 let currentEditingIndex = -1;
 
-// Error logging utility
+
 const logError = (error, context) => {
     console.error(`[TodoApp Error] ${context}:`, error);
-    // In production, this could send to error tracking service
+  
 };
 
-// Safe localStorage operations with error handling
+
 const safeLocalStorage = {
     getItem: (key) => {
         try {
@@ -33,7 +29,7 @@ const safeLocalStorage = {
     }
 };
 
-// DOM elements
+
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
@@ -46,7 +42,7 @@ const popupMessage = document.getElementById('popupMessage');
 const confirmBtn = document.getElementById('confirmBtn');
 const cancelBtn = document.getElementById('cancelBtn');
 
-// Initialize application
+
 const initializeApp = () => {
     loadTasksFromStorage();
     renderTasks();
@@ -54,7 +50,7 @@ const initializeApp = () => {
     updateDeleteAllButton();
 };
 
-// Load tasks from localStorage
+
 const loadTasksFromStorage = () => {
     try {
         const storedTasks = safeLocalStorage.getItem('todoTasks');
@@ -73,7 +69,7 @@ const loadTasksFromStorage = () => {
     }
 };
 
-// Save tasks to localStorage
+
 const saveTasksToStorage = () => {
     try {
         const success = safeLocalStorage.setItem('todoTasks', JSON.stringify(tasks));
@@ -86,21 +82,21 @@ const saveTasksToStorage = () => {
     }
 };
 
-// Input validation function
+
 const validateTaskInput = (input) => {
     const trimmedInput = input.trim();
     
-    // Check if empty
+
     if (trimmedInput === '') {
         return { isValid: false, message: 'Task cannot be empty. Please enter a task.' };
     }
     
-    // Check if starts with a number
+   
     if (/^\d/.test(trimmedInput)) {
         return { isValid: false, message: 'Task cannot start with a number. Please modify your input.' };
     }
     
-    // Check if less than 5 characters
+ 
     if (trimmedInput.length < 5) {
         return { isValid: false, message: 'Task must be at least 5 characters long. Please add more details.' };
     }
@@ -108,45 +104,44 @@ const validateTaskInput = (input) => {
     return { isValid: true, message: '' };
 };
 
-// Show error message
+
 const showErrorMessage = (message) => {
     errorMessage.textContent = message;
     errorMessage.classList.add('show');
     
-    // Hide error message after 5 seconds
+ 
     setTimeout(() => {
         hideErrorMessage();
     }, 5000);
 };
 
-// Hide error message
+
 const hideErrorMessage = () => {
     errorMessage.classList.remove('show');
 };
 
-// Show popup
+
 const showPopup = (title, message, onConfirm) => {
     popupTitle.textContent = title;
     popupMessage.textContent = message;
     popup.style.display = 'flex';
     
-    // Remove previous event listeners
+    
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-    
-    // Add new event listener
+ 
     newConfirmBtn.addEventListener('click', () => {
         hidePopup();
         onConfirm();
     });
 };
 
-// Hide popup
+
 const hidePopup = () => {
     popup.style.display = 'none';
 };
 
-// Add new task
+
 const addTask = () => {
     const taskText = taskInput.value;
     const validation = validateTaskInput(taskText);
@@ -169,10 +164,10 @@ const addTask = () => {
     renderTasks();
     updateDeleteAllButton();
     
-    // Clear input
+    
     taskInput.value = '';
     
-    // Show success popup
+
     showPopup(
         'Success!',
         'Task has been added successfully.',
@@ -180,7 +175,6 @@ const addTask = () => {
     );
 };
 
-// Delete task
 const deleteTask = (index) => {
     const task = tasks[index];
     showPopup(
@@ -195,7 +189,7 @@ const deleteTask = (index) => {
     );
 };
 
-// Edit task
+
 const editTask = (index) => {
     const task = tasks[index];
     const newText = prompt('Edit task:', task.text);
@@ -220,7 +214,7 @@ const editTask = (index) => {
     }
 };
 
-// Delete all tasks
+
 const deleteAllTasks = () => {
     if (tasks.length === 0) {
         showErrorMessage('No tasks to delete.');
@@ -239,7 +233,7 @@ const deleteAllTasks = () => {
     );
 };
 
-// Update delete all button state
+
 const updateDeleteAllButton = () => {
     if (tasks.length === 0) {
         deleteAllBtn.disabled = true;
@@ -250,7 +244,7 @@ const updateDeleteAllButton = () => {
     }
 };
 
-// Render tasks
+
 const renderTasks = () => {
     taskList.innerHTML = '';
     
@@ -267,7 +261,7 @@ const renderTasks = () => {
     updateDeleteAllButton();
 };
 
-// Create task element
+
 const createTaskElement = (task, index) => {
     const li = document.createElement('li');
     li.className = 'task-item new';
@@ -280,7 +274,7 @@ const createTaskElement = (task, index) => {
         </div>
     `;
     
-    // Remove animation class after animation completes
+   
     setTimeout(() => {
         li.classList.remove('new');
     }, 300);
@@ -288,39 +282,39 @@ const createTaskElement = (task, index) => {
     return li;
 };
 
-// Escape HTML to prevent XSS
+
 const escapeHtml = (text) => {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 };
 
-// Attach event listeners
+
 const attachEventListeners = () => {
-    // Add task button
+    
     addTaskBtn.addEventListener('click', addTask);
     
-    // Enter key in input field
+   
     taskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             addTask();
         }
     });
     
-    // Delete all button
+    
     deleteAllBtn.addEventListener('click', deleteAllTasks);
     
-    // Cancel button in popup
+
     cancelBtn.addEventListener('click', hidePopup);
     
-    // Close popup when clicking outside
+  
     popup.addEventListener('click', (e) => {
         if (e.target === popup) {
             hidePopup();
         }
     });
     
-    // Clear error message when typing
+
     taskInput.addEventListener('input', () => {
         if (errorMessage.classList.contains('show')) {
             hideErrorMessage();
@@ -328,12 +322,12 @@ const attachEventListeners = () => {
     });
 };
 
-// Utility function for common operations (avoiding repetition)
+
 const showSuccessMessage = (message) => {
     showPopup('Success!', message, () => {});
 };
 
-// Function to get task statistics
+
 const getTaskStatistics = () => {
     return {
         total: tasks.length,
@@ -341,7 +335,7 @@ const getTaskStatistics = () => {
     };
 };
 
-// Function to export tasks (additional feature)
+
 const exportTasks = () => {
     if (tasks.length === 0) {
         showErrorMessage('No tasks to export.');
@@ -361,7 +355,6 @@ const exportTasks = () => {
     showSuccessMessage('Tasks exported successfully!');
 };
 
-// Function to import tasks (additional feature)
 const importTasks = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -386,12 +379,12 @@ const importTasks = (event) => {
     reader.readAsText(file);
 };
 
-// Make functions globally available for onclick handlers
+
 window.editTask = editTask;
 window.deleteTask = deleteTask;
 window.exportTasks = exportTasks;
 window.importTasks = importTasks;
 
-// Initialize the application when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', initializeApp);
 
