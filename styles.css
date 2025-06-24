@@ -1,11 +1,10 @@
-/* Reset and base styles */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Screen reader only class for accessibility */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -18,7 +17,6 @@
     border: 0;
 }
 
-/* CSS Custom Properties for theming */
 :root {
     /* Color palette */
     --primary-color: #3498db;
@@ -38,7 +36,7 @@
     --text-color: #333;
     --white: #ffffff;
     
-    /* Typography */
+
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-size-base: 1rem;
     --font-size-large: 1.5rem;
@@ -46,24 +44,21 @@
     --font-size-small: 0.9rem;
     --font-size-xsmall: 0.8rem;
     --line-height-base: 1.6;
-    
-    /* Spacing */
+
     --spacing-xs: 5px;
     --spacing-sm: 10px;
     --spacing-md: 15px;
     --spacing-lg: 20px;
     --spacing-xl: 30px;
-    
-    /* Border radius */
+
     --border-radius-sm: 3px;
     --border-radius-md: 5px;
     --border-radius-lg: 10px;
     
-    /* Shadows */
+
     --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.3);
-    
-    /* Transitions */
+
     --transition-fast: 0.3s ease;
     --transition-medium: 0.5s ease;
 }
@@ -82,7 +77,7 @@ body {
     min-height: 100vh;
 }
 
-/* Header styles */
+
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -95,7 +90,7 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* Main content styles */
+
 main {
     background: white;
     border-radius: 10px;
@@ -103,7 +98,7 @@ main {
     overflow: hidden;
 }
 
-/* Todo input section */
+
 .todo-input-section {
     background: #3498db;
     color: white;
@@ -171,7 +166,7 @@ main {
     display: block;
 }
 
-/* Todo list section */
+
 .todo-list-section {
     padding: 30px;
 }
@@ -207,7 +202,7 @@ main {
     cursor: not-allowed;
 }
 
-/* Task list styles */
+
 .task-list {
     list-style: none;
 }
@@ -277,7 +272,7 @@ main {
     border-radius: 5px;
 }
 
-/* Popup styles */
+
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -346,7 +341,7 @@ main {
     background: #7f8c8d;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -380,7 +375,7 @@ main {
     }
 }
 
-/* Animation for new tasks */
+
 @keyframes slideIn {
     from {
         opacity: 0;
