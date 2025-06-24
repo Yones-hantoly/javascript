@@ -1,9 +1,37 @@
 // Todo List Application - JavaScript Implementation
 // Following guidelines: arrow functions only, localStorage, input validation, popups
+// Student 2: Enhanced JavaScript functionality and error handling
 
 // Global variables
 let tasks = [];
 let currentEditingIndex = -1;
+
+// Error logging utility
+const logError = (error, context) => {
+    console.error(`[TodoApp Error] ${context}:`, error);
+    // In production, this could send to error tracking service
+};
+
+// Safe localStorage operations with error handling
+const safeLocalStorage = {
+    getItem: (key) => {
+        try {
+            return localStorage.getItem(key);
+        } catch (error) {
+            logError(error, 'localStorage.getItem');
+            return null;
+        }
+    },
+    setItem: (key, value) => {
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch (error) {
+            logError(error, 'localStorage.setItem');
+            return false;
+        }
+    }
+};
 
 // DOM elements
 const taskInput = document.getElementById('taskInput');
@@ -28,15 +56,34 @@ const initializeApp = () => {
 
 // Load tasks from localStorage
 const loadTasksFromStorage = () => {
-    const storedTasks = localStorage.getItem('todoTasks');
-    if (storedTasks) {
-        tasks = JSON.parse(storedTasks);
+    try {
+        const storedTasks = safeLocalStorage.getItem('todoTasks');
+        if (storedTasks) {
+            const parsedTasks = JSON.parse(storedTasks);
+            if (Array.isArray(parsedTasks)) {
+                tasks = parsedTasks;
+            } else {
+                logError('Invalid tasks data format', 'loadTasksFromStorage');
+                tasks = [];
+            }
+        }
+    } catch (error) {
+        logError(error, 'loadTasksFromStorage - JSON.parse');
+        tasks = [];
     }
 };
 
 // Save tasks to localStorage
 const saveTasksToStorage = () => {
-    localStorage.setItem('todoTasks', JSON.stringify(tasks));
+    try {
+        const success = safeLocalStorage.setItem('todoTasks', JSON.stringify(tasks));
+        if (!success) {
+            showErrorMessage('Failed to save tasks. Please try again.');
+        }
+    } catch (error) {
+        logError(error, 'saveTasksToStorage');
+        showErrorMessage('Failed to save tasks. Please try again.');
+    }
 };
 
 // Input validation function
