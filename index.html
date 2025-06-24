@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoInput - Task Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TodoInput</h1>
+        </header>
+        
+        <main>
+            <div class="todo-input-section">
+                <h2>New Task</h2>
+                <div class="input-container">
+                    <input type="text" id="taskInput" placeholder="Enter your task here..." maxlength="50">
+                    <button id="addTaskBtn" class="add-btn">Add new task</button>
+                </div>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+            
+            <div class="todo-list-section">
+                <h2>Todo List</h2>
+                <div class="task-controls">
+                    <button id="deleteAllBtn" class="delete-all-btn" disabled>Delete All</button>
+                </div>
+                <ul id="taskList" class="task-list">
+                    <!-- Tasks will be dynamically added here -->
+                </ul>
+                <div id="noTasksMessage" class="no-tasks-message" style="display: none;">
+                    No tasks to delete
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Popup Modal -->
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h3 id="popupTitle">Confirmation</h3>
+            <p id="popupMessage">Are you sure you want to perform this action?</p>
+            <div class="popup-buttons">
+                <button id="confirmBtn" class="confirm-btn">Confirm</button>
+                <button id="cancelBtn" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
