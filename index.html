@@ -45,13 +45,13 @@
     </div>
     
     <!-- Popup Modal -->
-    <div id="popup" class="popup-overlay" style="display: none;">
+    <div id="popup" class="popup-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupMessage">
         <div class="popup-content">
             <h3 id="popupTitle">Confirmation</h3>
             <p id="popupMessage">Are you sure you want to perform this action?</p>
-            <div class="popup-buttons">
-                <button id="confirmBtn" class="confirm-btn">Confirm</button>
-                <button id="cancelBtn" class="cancel-btn">Cancel</button>
+            <div class="popup-buttons" role="group" aria-label="Confirmation buttons">
+                <button id="confirmBtn" class="confirm-btn" aria-label="Confirm action">Confirm</button>
+                <button id="cancelBtn" class="cancel-btn" aria-label="Cancel action">Cancel</button>
             </div>
         </div>
     </div>
